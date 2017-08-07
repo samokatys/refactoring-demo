@@ -7,10 +7,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static junit.framework.TestCase.assertEquals;
 import static org.fest.assertions.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 import static org.junit.Assume.assumeTrue;
 
 public class ArrayListTest {
@@ -28,7 +25,12 @@ public class ArrayListTest {
         //endregion
 
         //region Assert | Then
-        assertEquals(1, sut.size());
+//        assertEquals("выдлпорвалдпровалопр ???? валопрвалопрвалопр", sut.getStatement());
+//        assertTrue(sut.getStatement().contains("fdgfgd"));
+        assertThat(sut)
+                .contains(1,2,3)
+                .doesNotContain(5);
+        //Fluent API
         //endregion
     }
 
