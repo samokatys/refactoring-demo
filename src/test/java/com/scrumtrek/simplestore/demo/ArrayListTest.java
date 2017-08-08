@@ -1,9 +1,7 @@
 package com.scrumtrek.simplestore.demo;
 
-import org.junit.Assert;
-import org.junit.Assume;
-import org.junit.Ignore;
-import org.junit.Test;
+import com.scrumtrek.simplestore.Rental;
+import org.junit.*;
 
 import java.util.ArrayList;
 
@@ -14,11 +12,29 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
 
 public class ArrayListTest {
+    private ArrayList<Object> sut;
+
+    /**
+     * 1. ALT.beforeClass()
+     * 2. alt = new ALT();
+     * 3. alt.before()
+     * 4. alt.test01()
+     * 5. alt.after()
+     * 6. new ALT();
+     * 7. alt.before()
+     * 8. alt.test02()
+     * 9. alt.after()
+     * 10. ALT.afterClass()
+     */
+    @Before //@After | @BeforeClass
+    public void setUp() {
+        this.sut = new ArrayList<>();
+    }
+
     @Ignore
     @Test(timeout = 1_000)
     public void shouldSizeIncrementedWhenElementAdd() { //BDD = DDD + tests
         //region Fixture | Arrange | Given
-        ArrayList sut = new ArrayList();
         Object dummy = new Object();
 
         assumeTrue(sut.isEmpty());
@@ -48,7 +64,17 @@ public class ArrayListTest {
     @Test
     public void shouldToStringDependsOnElementsWhenStubToString() {
         //region Given
-        ArrayList<Object> sut = new ArrayList<>();
+
+        /*
+        Movie m = prepareFixture(1,2,3,5);
+        Rental stub = RealDatabaseRentalBuilder
+                .withRentalProperty("ffff")
+                .withMovie(MockitoMovieBuilder
+                        .withPriceCode(1,2,3,4)
+                    .build())
+            .build();
+        */
+
         String stub = mock(String.class);
         when(stub.toString())
                 .thenReturn("test string 1")
