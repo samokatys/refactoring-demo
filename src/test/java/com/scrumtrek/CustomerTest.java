@@ -5,8 +5,15 @@ import com.scrumtrek.simplestore.Movie;
 import com.scrumtrek.simplestore.PriceCodes;
 import com.scrumtrek.simplestore.Rental;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
+import java.util.Arrays;
+import java.util.Collection;
+
+@Ignore
 public class CustomerTest {
     @Test
     public void shouldSuccessWhenNewRelease() {
@@ -31,6 +38,7 @@ public class CustomerTest {
                 statement);
         // endregion
     }
+
     @Test
     public void shouldSuccessWhenNewReleaseNoDays() {
         // region Given
@@ -56,8 +64,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void shouldSuccessWhenRegularDaysLessOrEqual2()
-    {
+    public void shouldSuccessWhenRegularDaysLessOrEqual2() {
         // region Given
         Customer sut = new Customer("Slave");
 
@@ -167,6 +174,8 @@ public class CustomerTest {
                 sut.getName());
         // endregion
     }
+}
+
 
     /*
     @Test
@@ -179,6 +188,4 @@ public class CustomerTest {
 
         // region Then
         // endregion
-    }
-    * */
-}
+    }*/
