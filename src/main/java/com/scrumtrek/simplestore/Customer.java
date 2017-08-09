@@ -28,49 +28,74 @@ public class Customer {
 		String result = "Rental record for " + m_Name + "\n";
 		
 		for(Rental each: m_Rentals) {
-			double thisAmount = 0;
-			
-			// Determine amounts for each line
-			switch(each.getMovie().getPriceCode()) {
-				case Regular:
-					thisAmount += 2;
-					if (each.getDaysRented() > 2)
-					{
-						thisAmount += (each.getDaysRented() - 2) * 1.5;
-					}
-					break;
-	
-				case NewRelease:
-					thisAmount += each.getDaysRented() * 3;
-					break;
-	
-				case Childrens:
-					thisAmount += 1.5;
-					if (each.getDaysRented() > 3)
-					{
-						thisAmount = (each.getDaysRented() - 3) * 1.5;
-					}
-					break;
-			}
-
-			// Add frequent renter points
-			frequentRenterPoints++;
-
-			// Add bonus for a two-day new-release rental
-			if ((each.getMovie().getPriceCode() == PriceCodes.NewRelease) && (each.getDaysRented() > 1))
-			{
-				frequentRenterPoints ++;
-			}
+			CalcData data = CalcStatement(each);
 
 			// Show figures for this rental
-			result += "\t" + each.getMovie().getTitle() + "\t" + thisAmount + "\n";
-			totalAmount += thisAmount;
+			result += "\t" + each.getMovie().getTitle() + "\t" + data.amount + "\n";
+			totalAmount += data.amount;
+			frequentRenterPoints += data.frequentRenterPoints;
 		}
 
 		// Add footer lines
 		result += "Amount owed is " + totalAmount + "\n";
 		result += "You earned " + frequentRenterPoints + " frequent renter points.";
 		return result;
+	}
+
+	public CalcData CalcStatement(Rental rental)
+	{
+		CalcData data = new CalcData(0.0, 0);
+		// Determine amounts for each line
+		switch(rental.getMovie().getPriceCode()) {
+			case XXX:
+			case Regular:
+				data.amount += 2;
+				if (rental.getDaysRented() > 2)
+				{
+					data.amount += (rental.getDaysRented() - 2) * 1.5;
+				}
+				break;
+
+			case NewRelease:
+				data.amount += rental.getDaysRented() * 3;
+				break;
+
+			case Childrens:
+				data.amount += 1.5;
+				if (rental.getDaysRented() > 3)
+				{
+					data.amount += (rental.getDaysRented() - 3) * 1.5;
+				}
+				break;
+		}
+
+		// Add frequent renter points
+		data.frequentRenterPoints++;
+
+		// Add bonus for a two-day new-release rental
+		if ((rental.getMovie().getPriceCode() == PriceCodes.NewRelease) && (rental.getDaysRented() > 1))
+		{
+			data.frequentRenterPoints ++;
+		}
+
+		if (rental.getMovie().getPriceCode() == PriceCodes.XXX)
+		{
+			data.amount *= 0.95;
+		}
+
+		return data;
+	}
+
+	public static class CalcData
+	{
+		public int frequentRenterPoints = 0;
+		public double amount = 0;
+
+		public CalcData(double a, int f)
+		{
+			amount = a;
+			frequentRenterPoints = f;
+		}
 	}
 }
 

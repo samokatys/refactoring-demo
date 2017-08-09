@@ -21,4 +21,3 @@ public class Movie {
 		return m_Title;
 	}
 }
-

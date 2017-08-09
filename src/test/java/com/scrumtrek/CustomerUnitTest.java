@@ -28,8 +28,8 @@ public class CustomerUnitTest {
                         "You earned 1 frequent renter points." },
                 { 30, "Gladiator", PriceCodes.Childrens,
                         "Rental record for Slave\n" +
-                                "\tGladiator\t40.5\n" +
-                                "Amount owed is 40.5\n" +
+                                "\tGladiator\t42.0\n" +
+                                "Amount owed is 42.0\n" +
                                 "You earned 1 frequent renter points."},
 
 
