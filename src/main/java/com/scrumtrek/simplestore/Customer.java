@@ -3,6 +3,7 @@ package com.scrumtrek.simplestore;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Customer {
 	private String m_Name;
 	private List<Rental> m_Rentals = new ArrayList<Rental>();
